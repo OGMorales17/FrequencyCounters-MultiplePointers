@@ -21,6 +21,28 @@ constructNote('aa', 'abc') // false
 constructNote('abc', 'dcba') // true
 constructNote('aabbcc', 'bcabcaddff') // true
 
-function constructNote(str1, str2) {
 
+function makeFreqCounter(letters) {
+    const frequencies = {}
+
+    for (let char of letters) {
+        frequencies[char] = ++frequencies[char] || 1;
+    }
+    return frequencies
+}
+
+
+function constructNote(msg, letter) {
+    const messageFreq = makeFreqCounter(msg);
+    const lettersFreq = makeFreqCounter(letter);
+
+    for (let char in messageFreq) {
+        if (!lettersFreq[char]) {
+            return false;
+        }
+        if (messageFreq[char] > lettersFreq[char]) {
+            return false;
+        }
+    }
+    return true;
 }
