@@ -24,5 +24,14 @@ countPairs([0, -4], -4) // 1
 countPairs([1, 2, 3, 0, -1, -2], 0) // 2
 
 
-function countPairs() {
+function countPairs(arr, num) {
+    let s = new Set(arr)
+    let count = 0;
+    for (let val of arr) {
+        s.delete(val);
+        if (s.has(num - val)) {
+            count++;
+        }
+    }
+    return count;
 }
